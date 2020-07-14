@@ -86,6 +86,7 @@ with a as
 (
   select
     ie.subject_id, ie.hadm_id, ie.stay_id
+    , adm.admittime, adm.dischtime
     , co.intime
     -- MIMIC-IV does not contain day of the week information
     -- , EXTRACT(DAY FROM co.intime) as day_icu_intime
