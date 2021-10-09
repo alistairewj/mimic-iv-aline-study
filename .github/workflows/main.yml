@@ -1,0 +1,21 @@
+name: "Generate tables on BigQuery"
+on:
+  pull_request: {}
+  push:
+      branches: ["master"]
+
+jobs:
+  deploy_schemas:
+    runs-on: ubuntu-latest
+    name: Generate tables on BigQuery
+    steps:
+      # To use this repository's private action,
+      # you must check out the repository
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: Deploy schemas to BigQuery
+        uses: jashparekh/bigquery-action@v1
+        env:
+          gcp_project: 'lcp-internal'
+          dataset_schema_directory: 'lcp-internal/aline'
+          credentials: ${{ secrets.GCP_SERVICE_ACCOUNT }}
